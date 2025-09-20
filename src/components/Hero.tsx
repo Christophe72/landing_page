@@ -6,9 +6,6 @@ const Hero = () => {
       <div className="max-w-6xl px-4 mx-auto sm:px-6 lg:px-8">
         <div className="text-center">
           <div className="mb-8">
-            {/* <div className="flex items-center justify-center w-32 h-32 mx-auto mb-6 rounded-full bg-gradient-to-br from-blue-600 to-indigo-600">
-              <span className="text-4xl font-bold text-white">CS</span>
-            </div> */}
             <h1 className="mb-6 text-4xl font-bold text-gray-900 md:text-6xl dark:text-white">
               👋 Bonjour, je suis{" "}
               <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-600 to-indigo-600">
