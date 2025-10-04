@@ -4,7 +4,7 @@ import {
   ExternalLink,
   Star,
   GitFork,
-  Code2,
+  // Code2,
   Lock,
   Globe,
 } from "lucide-react";
@@ -168,11 +168,11 @@ function Projects({ darkMode }: ProjectsProps) {
               >
                 <div className="flex items-start justify-between mb-4">
                   <div className="flex items-center flex-1 gap-2">
-                    <Code2
+                    {/* <Code2
                       className={`w-5 h-5 ${
                         darkMode ? "text-slate-300" : "text-slate-700"
                       }`}
-                    />
+                    /> */}
                     <h3
                       className={`font-bold text-lg transition-colors ${
                         darkMode
