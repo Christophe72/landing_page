@@ -1,8 +1,10 @@
 function TFESection({ darkMode }: { darkMode: boolean }) {
   return (
     <section
-      className={`max-w-4xl p-6 mx-auto mt-4 shadow rounded-2xl transition-colors duration-300 ${
-        darkMode ? "bg-gray-900 text-white" : "bg-white text-gray-900"
+      className={`max-w-4xl p-6 mx-auto mt-4 shadow-lg rounded-2xl border transition-colors duration-300 ${
+        darkMode
+          ? "text-slate-400 border-slate-700"
+          : "text-slate-500 border-slate-200"
       }`}
     >
       <h2 className="mb-2 text-xl font-semibold">
@@ -16,7 +18,7 @@ function TFESection({ darkMode }: { darkMode: boolean }) {
         configuration, le contrôle et le retour d’état du moteur. Ce projet m’a
         permis de renforcer mes compétences en{" "}
         <strong>électronique embarquée</strong>,{" "}
-        <strong>protocoles industriels (CAN, CANopen)</strong>
+        <strong>bus et protocoles industriels (CAN, CANopen)</strong>
         et en <strong>programmation bas niveau</strong> pour systèmes
         automatisés.
       </p>

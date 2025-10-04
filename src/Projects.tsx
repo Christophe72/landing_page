@@ -1,6 +1,5 @@
 import { useState, useEffect } from "react";
 import {
-  Github,
   ExternalLink,
   Star,
   GitFork,
@@ -75,6 +74,18 @@ function Projects({ darkMode }: ProjectsProps) {
     return descriptions[name] || `Projet de développement - ${name}`;
   };
 
+  // Remplacement de l'icône Github par un SVG personnalisé
+  const GithubIcon = ({ className }: { className?: string }) => (
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      viewBox="0 0 24 24"
+      fill="currentColor"
+      className={className || "w-16 h-16"}
+    >
+      <path d="M12 0C5.37 0 0 5.37 0 12c0 5.3 3.44 9.8 8.2 11.38.6.1.82-.26.82-.58v-2.02c-3.34.72-4.04-1.6-4.04-1.6-.54-1.38-1.32-1.75-1.32-1.75-1.08-.74.08-.72.08-.72 1.2.08 1.83 1.24 1.83 1.24 1.06 1.82 2.8 1.3 3.48.98.1-.78.42-1.3.76-1.6-2.67-.3-5.47-1.34-5.47-5.98 0-1.32.47-2.4 1.24-3.24-.12-.3-.54-1.5.12-3.14 0 0 1-.32 3.3 1.24a11.5 11.5 0 0 1 6 0c2.3-1.56 3.3-1.24 3.3-1.24.66 1.64.24 2.84.12 3.14.78.84 1.24 1.92 1.24 3.24 0 4.66-2.8 5.68-5.48 5.98.42.36.8 1.1.8 2.22v3.28c0 .32.22.7.82.58A12 12 0 0 0 24 12c0-6.63-5.37-12-12-12z" />
+    </svg>
+  );
+
   return (
     <div
       className={`min-h-screen transition-colors duration-300 ${
@@ -86,7 +97,7 @@ function Projects({ darkMode }: ProjectsProps) {
       <div className="px-4 py-12 mx-auto max-w-7xl sm:px-6 lg:px-8">
         <header className="mb-16 text-center">
           <div className="flex items-center justify-center gap-4 mb-6">
-            <Github
+            <GithubIcon
               className={`w-16 h-16 ${
                 darkMode ? "text-blue-400" : "text-slate-800"
               }`}
@@ -116,7 +127,6 @@ function Projects({ darkMode }: ProjectsProps) {
                 : "bg-slate-900 hover:bg-slate-800 text-white"
             }`}
           >
-            <Github className="w-5 h-5" />
             Visiter mon GitHub
             <ExternalLink className="w-4 h-4" />
           </a>
