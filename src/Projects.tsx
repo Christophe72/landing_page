@@ -1,5 +1,13 @@
-import { useState, useEffect } from 'react';
-import { Github, ExternalLink, Star, GitFork, Code2, Lock, Globe } from 'lucide-react';
+import { useState, useEffect } from "react";
+import {
+  Github,
+  ExternalLink,
+  Star,
+  GitFork,
+  Code2,
+  Lock,
+  Globe,
+} from "lucide-react";
 
 interface Repository {
   id: number;
@@ -20,63 +28,82 @@ interface ProjectsProps {
 function Projects({ darkMode }: ProjectsProps) {
   const [repos, setRepos] = useState<Repository[]>([]);
   const [loading, setLoading] = useState(true);
-  const [filter, setFilter] = useState<string>('all');
+  const [filter, setFilter] = useState<string>("all");
 
   useEffect(() => {
-    fetch('https://api.github.com/users/Christophe72/repos?sort=updated&per_page=100')
-      .then(res => res.json())
-      .then(data => {
+    fetch(
+      "https://api.github.com/users/Christophe72/repos?sort=updated&per_page=100"
+    )
+      .then((res) => res.json())
+      .then((data) => {
         setRepos(data);
         setLoading(false);
       })
-      .catch(err => {
-        console.error('Error fetching repos:', err);
+      .catch((err) => {
+        console.error("Error fetching repos:", err);
         setLoading(false);
       });
   }, []);
 
-  const languages = ['all', ...new Set(repos.map(r => r.language).filter(Boolean))];
-  const filteredRepos = filter === 'all'
-    ? repos
-    : repos.filter(r => r.language === filter);
+  const languages = [
+    "all",
+    ...new Set(repos.map((r) => r.language).filter(Boolean)),
+  ];
+  const filteredRepos =
+    filter === "all" ? repos : repos.filter((r) => r.language === filter);
 
   const getLanguageColor = (language: string | null) => {
     const colors: Record<string, string> = {
-      TypeScript: 'bg-blue-500',
-      JavaScript: 'bg-yellow-500',
-      Java: 'bg-red-500',
-      Python: 'bg-green-500',
-      CSS: 'bg-pink-500',
-      HTML: 'bg-orange-500',
+      TypeScript: "bg-blue-500",
+      JavaScript: "bg-yellow-500",
+      Java: "bg-red-500",
+      Python: "bg-green-500",
+      CSS: "bg-pink-500",
+      HTML: "bg-orange-500",
     };
-    return colors[language || ''] || 'bg-gray-500';
+    return colors[language || ""] || "bg-gray-500";
   };
 
   const getDefaultDescription = (name: string) => {
     const descriptions: Record<string, string> = {
-      'app-choix-protections': 'Application de sélection de protections électriques',
-      'arduino-cours': 'Cours et tutoriels Arduino',
-      'back-rgie-der': 'API backend pour aide au dépannage électrique',
-      'back-rgie-springboot': 'Backend Spring Boot pour application RGIE',
+      "app-choix-protections":
+        "Application de sélection de protections électriques",
+      "arduino-cours": "Cours et tutoriels Arduino",
+      "back-rgie-der": "API backend pour aide au dépannage électrique",
+      "back-rgie-springboot": "Backend Spring Boot pour application RGIE",
     };
     return descriptions[name] || `Projet de développement - ${name}`;
   };
 
   return (
-    <div className={`min-h-screen transition-colors duration-300 ${
-      darkMode
-        ? 'bg-gradient-to-br from-gray-900 via-slate-800 to-gray-900'
-        : 'bg-gradient-to-br from-slate-50 via-blue-50 to-slate-100'
-    }`}>
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
-        <header className="text-center mb-16">
+    <div
+      className={`min-h-screen transition-colors duration-300 ${
+        darkMode
+          ? "bg-gradient-to-br from-gray-900 via-slate-800 to-gray-900"
+          : "bg-gradient-to-br from-slate-50 via-blue-50 to-slate-100"
+      }`}
+    >
+      <div className="px-4 py-12 mx-auto max-w-7xl sm:px-6 lg:px-8">
+        <header className="mb-16 text-center">
           <div className="flex items-center justify-center gap-4 mb-6">
-            <Github className={`w-16 h-16 ${darkMode ? 'text-blue-400' : 'text-slate-800'}`} />
+            <Github
+              className={`w-16 h-16 ${
+                darkMode ? "text-blue-400" : "text-slate-800"
+              }`}
+            />
           </div>
-          <h1 className={`text-5xl font-bold mb-4 ${darkMode ? 'text-white' : 'text-slate-900'}`}>
+          <h1
+            className={`text-5xl font-bold mb-4 ${
+              darkMode ? "text-white" : "text-slate-900"
+            }`}
+          >
             Mes Projets
           </h1>
-          <p className={`text-xl mb-6 ${darkMode ? 'text-slate-300' : 'text-slate-600'}`}>
+          <p
+            className={`text-xl mb-6 ${
+              darkMode ? "text-slate-300" : "text-slate-600"
+            }`}
+          >
             Découvrez mes projets de développement
           </p>
           <a
@@ -85,8 +112,8 @@ function Projects({ darkMode }: ProjectsProps) {
             rel="noopener noreferrer"
             className={`inline-flex items-center gap-2 px-6 py-3 rounded-lg transition-all duration-200 shadow-lg hover:shadow-xl ${
               darkMode
-                ? 'bg-blue-600 hover:bg-blue-700 text-white'
-                : 'bg-slate-900 hover:bg-slate-800 text-white'
+                ? "bg-blue-600 hover:bg-blue-700 text-white"
+                : "bg-slate-900 hover:bg-slate-800 text-white"
             }`}
           >
             <Github className="w-5 h-5" />
@@ -96,36 +123,38 @@ function Projects({ darkMode }: ProjectsProps) {
         </header>
 
         <div className="mb-8">
-          <div className="flex flex-wrap gap-2 justify-center">
-            {languages.map(lang => (
+          <div className="flex flex-wrap justify-center gap-2">
+            {languages.map((lang) => (
               <button
                 key={lang}
-                onClick={() => setFilter(lang)}
+                onClick={() => setFilter(lang || "")}
                 className={`px-4 py-2 rounded-lg font-medium transition-all duration-200 ${
                   filter === lang
                     ? darkMode
-                      ? 'bg-blue-600 text-white shadow-lg'
-                      : 'bg-slate-900 text-white shadow-lg'
+                      ? "bg-blue-600 text-white shadow-lg"
+                      : "bg-slate-900 text-white shadow-lg"
                     : darkMode
-                      ? 'bg-slate-700 text-slate-200 hover:bg-slate-600 shadow'
-                      : 'bg-white text-slate-700 hover:bg-slate-100 shadow'
+                    ? "bg-slate-700 text-slate-200 hover:bg-slate-600 shadow"
+                    : "bg-white text-slate-700 hover:bg-slate-100 shadow"
                 }`}
               >
-                {lang === 'all' ? 'Tous' : lang}
+                {lang === "all" ? "Tous" : lang}
               </button>
             ))}
           </div>
         </div>
 
         {loading ? (
-          <div className="flex justify-center items-center py-20">
-            <div className={`animate-spin rounded-full h-12 w-12 border-b-2 ${
-              darkMode ? 'border-blue-400' : 'border-slate-900'
-            }`}></div>
+          <div className="flex items-center justify-center py-20">
+            <div
+              className={`animate-spin rounded-full h-12 w-12 border-b-2 ${
+                darkMode ? "border-blue-400" : "border-slate-900"
+              }`}
+            ></div>
           </div>
         ) : (
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-            {filteredRepos.map(repo => (
+          <div className="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3">
+            {filteredRepos.map((repo) => (
               <a
                 key={repo.id}
                 href={repo.html_url}
@@ -133,61 +162,99 @@ function Projects({ darkMode }: ProjectsProps) {
                 rel="noopener noreferrer"
                 className={`group rounded-xl shadow-md hover:shadow-2xl transition-all duration-300 p-6 border hover:-translate-y-1 ${
                   darkMode
-                    ? 'bg-slate-800 border-slate-700 hover:border-slate-600'
-                    : 'bg-white border-slate-200 hover:border-slate-300'
+                    ? "bg-slate-800 border-slate-700 hover:border-slate-600"
+                    : "bg-white border-slate-200 hover:border-slate-300"
                 }`}
               >
                 <div className="flex items-start justify-between mb-4">
-                  <div className="flex items-center gap-2 flex-1">
-                    <Code2 className={`w-5 h-5 ${darkMode ? 'text-slate-300' : 'text-slate-700'}`} />
-                    <h3 className={`font-bold text-lg transition-colors ${
-                      darkMode
-                        ? 'text-white group-hover:text-blue-400'
-                        : 'text-slate-900 group-hover:text-blue-600'
-                    }`}>
+                  <div className="flex items-center flex-1 gap-2">
+                    <Code2
+                      className={`w-5 h-5 ${
+                        darkMode ? "text-slate-300" : "text-slate-700"
+                      }`}
+                    />
+                    <h3
+                      className={`font-bold text-lg transition-colors ${
+                        darkMode
+                          ? "text-white group-hover:text-blue-400"
+                          : "text-slate-900 group-hover:text-blue-600"
+                      }`}
+                    >
                       {repo.name}
                     </h3>
                   </div>
                   <div className="flex items-center gap-2">
                     {repo.private ? (
-                      <Lock className={`w-4 h-4 ${darkMode ? 'text-red-400' : 'text-red-500'}`} title="Privé" />
+                      <Lock
+                        className={`w-4 h-4 ${
+                          darkMode ? "text-red-400" : "text-red-500"
+                        }`}
+                      />
                     ) : (
-                      <Globe className={`w-4 h-4 ${darkMode ? 'text-green-400' : 'text-green-600'}`} title="Public" />
+                      <Globe
+                        className={`w-4 h-4 ${
+                          darkMode ? "text-green-400" : "text-green-600"
+                        }`}
+                      />
                     )}
-                    <ExternalLink className={`w-4 h-4 transition-colors ${
-                      darkMode
-                        ? 'text-slate-500 group-hover:text-slate-300'
-                        : 'text-slate-400 group-hover:text-slate-700'
-                    }`} />
+                    <ExternalLink
+                      className={`w-4 h-4 transition-colors ${
+                        darkMode
+                          ? "text-slate-500 group-hover:text-slate-300"
+                          : "text-slate-400 group-hover:text-slate-700"
+                      }`}
+                    />
                   </div>
                 </div>
 
-                <p className={`mb-4 line-clamp-3 min-h-[4rem] ${
-                  darkMode ? 'text-slate-300' : 'text-slate-600'
-                }`}>
+                <p
+                  className={`mb-4 line-clamp-3 min-h-[4rem] ${
+                    darkMode ? "text-slate-300" : "text-slate-600"
+                  }`}
+                >
                   {repo.description || getDefaultDescription(repo.name)}
                 </p>
 
-                <div className={`flex items-center justify-between pt-4 border-t ${
-                  darkMode ? 'border-slate-700' : 'border-slate-100'
-                }`}>
+                <div
+                  className={`flex items-center justify-between pt-4 border-t ${
+                    darkMode ? "border-slate-700" : "border-slate-100"
+                  }`}
+                >
                   <div className="flex items-center gap-4">
                     {repo.language && (
                       <div className="flex items-center gap-2">
-                        <span className={`w-3 h-3 rounded-full ${getLanguageColor(repo.language)}`}></span>
-                        <span className={`text-sm ${darkMode ? 'text-slate-300' : 'text-slate-600'}`}>{repo.language}</span>
+                        <span
+                          className={`w-3 h-3 rounded-full ${getLanguageColor(
+                            repo.language
+                          )}`}
+                        ></span>
+                        <span
+                          className={`text-sm ${
+                            darkMode ? "text-slate-300" : "text-slate-600"
+                          }`}
+                        >
+                          {repo.language}
+                        </span>
                       </div>
                     )}
                   </div>
                   <div className="flex items-center gap-3">
                     {repo.stargazers_count > 0 && (
-                      <div className={`flex items-center gap-1 ${darkMode ? 'text-slate-400' : 'text-slate-500'}`}>
+                      <div
+                        className={`flex items-center gap-1 ${
+                          darkMode ? "text-slate-400" : "text-slate-500"
+                        }`}
+                      >
                         <Star className="w-4 h-4" />
                         <span className="text-sm">{repo.stargazers_count}</span>
                       </div>
                     )}
                     {repo.forks_count > 0 && (
-                      <div className={`flex items-center gap-1 ${darkMode ? 'text-slate-400' : 'text-slate-500'}`}>
+                      <div
+                        className={`flex items-center gap-1 ${
+                          darkMode ? "text-slate-400" : "text-slate-500"
+                        }`}
+                      >
                         <GitFork className="w-4 h-4" />
                         <span className="text-sm">{repo.forks_count}</span>
                       </div>
@@ -200,8 +267,14 @@ function Projects({ darkMode }: ProjectsProps) {
         )}
 
         {!loading && filteredRepos.length === 0 && (
-          <div className="text-center py-20">
-            <p className={`text-lg ${darkMode ? 'text-slate-300' : 'text-slate-600'}`}>Aucun projet trouvé avec ce filtre</p>
+          <div className="py-20 text-center">
+            <p
+              className={`text-lg ${
+                darkMode ? "text-slate-300" : "text-slate-600"
+              }`}
+            >
+              Aucun projet trouvé avec ce filtre
+            </p>
           </div>
         )}
       </div>
