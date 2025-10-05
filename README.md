@@ -10,6 +10,7 @@ Ce projet est un starter pour une application React utilisant TypeScript, config
 - **TailwindCSS** : Framework CSS utilitaire pour un style rapide et réactif.
 - **ESLint** : Analyse statique pour maintenir un code propre.
 
+- https://new-chat-8jrn.bolt.host/
 ## 📂 Structure du projet
 
 ```
