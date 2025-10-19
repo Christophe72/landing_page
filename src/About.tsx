@@ -122,33 +122,6 @@ function SectionCard({
   );
 }
 
-function LatestExperience({ darkMode }: { darkMode: boolean }) {
-  return (
-    <SectionCard
-      className={
-        darkMode
-          ? "bg-slate-900 border-slate-700 text-slate-200"
-          : "bg-white border-slate-200 text-slate-700"
-      }
-    >
-      {/* <h2 className="flex items-center gap-2 mb-4 text-lg font-bold">
-        <Briefcase className="w-5 h-5" />
-        Dernières expériences professionnelles
-      </h2> */}
-      <ul className="space-y-2">
-        {/* {latestExperiences.map((exp, idx) => (
-          <li key={idx} className="flex flex-col">
-            <span className="font-semibold">{exp.title}</span>
-            <span className="text-sm text-slate-500 dark:text-slate-400">
-              {exp.period}
-            </span>
-          </li>
-        ))} */}
-      </ul>
-    </SectionCard>
-  );
-}
-
 function SkillsSection({ darkMode }: { darkMode: boolean }) {
   return (
     <div className="grid grid-cols-1 gap-8 mb-12 lg:grid-cols-3">
@@ -402,17 +375,13 @@ function About({ darkMode }: AboutProps) {
             Double compétence en électricité et informatique
           </p>
         </header>
-        <LatestExperience darkMode={darkMode} />
         <SkillsSection darkMode={darkMode} />
         <div className="grid grid-cols-1 gap-8 lg:grid-cols-2">
           <ExperienceList darkMode={darkMode} />
           <EducationSection darkMode={darkMode} />
         </div>
+
         <InterestsSection darkMode={darkMode} />
-        {/* <div className="mt-8">
-          <TFESection darkMode={darkMode} />
-          <ExperienceSection darkMode={darkMode} />
-        </div> */}
       </div>
     </div>
   );
